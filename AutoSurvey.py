@@ -15,7 +15,16 @@ def login(driver):
         raise Exception
     driver.find_element_by_partial_link_text("Complete Survey").click()
 
+def answerQuestions(driver):
+    driver.find_element_by_partial_link_text("Continue").click()
+    driver.implicitly_wait(10)
+    elements = driver.find_elements_by_class_name("col-xs-6")
+    for i in range(2, 17, 2):
+        elements[i].click()
+    driver.find_element_by_tag_name("input").click()
+    
 
 driver = webdriver.Firefox()
 login(driver)
+answerQuestions(driver)
 driver.close()
